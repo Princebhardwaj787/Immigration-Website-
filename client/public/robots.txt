@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+
+# Sitemap is generated dynamically at /sitemap.xml
+Sitemap: https://www.example.com/sitemap.xml
