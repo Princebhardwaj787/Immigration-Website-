@@ -5,15 +5,13 @@ import Seo, { breadcrumbLd } from '@/components/ui/Seo';
 import { Section } from '@/components/ui/Section';
 import Reveal from '@/components/ui/Reveal';
 import SmartImage from '@/components/ui/SmartImage';
-import { CardsSkeleton, ErrorState, EmptyState } from '@/components/ui/States';
-import { useFetch } from '@/hooks/useFetch';
-import type { CountryListItem } from '@/services/api';
+import { EmptyState } from '@/components/ui/States';
+import { COUNTRIES } from '@/data/countries';
 
 export default function Countries() {
-  const { data, loading, error, refetch } = useFetch<{ data: CountryListItem[] }>('/countries');
   const [query, setQuery] = useState('');
 
-  const countries = (data?.data ?? []).filter((c) =>
+  const countries = COUNTRIES.filter((c) =>
     `${c.name} ${c.tagline || ''} ${(c.visaCategories || []).join(' ')}`
       .toLowerCase()
       .includes(query.toLowerCase()),
@@ -72,11 +70,7 @@ export default function Countries() {
       </section>
 
       <Section>
-        {loading ? (
-          <CardsSkeleton count={6} />
-        ) : error ? (
-          <ErrorState message={error} onRetry={refetch} />
-        ) : countries.length === 0 ? (
+        {countries.length === 0 ? (
           <EmptyState message={`No countries match “${query}”.`} />
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
