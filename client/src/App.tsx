@@ -1,8 +1,15 @@
 import { Suspense, lazy, Component, type ReactNode } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useParams } from 'react-router-dom';
 
 import PublicLayout from '@/components/layout/PublicLayout';
 import { CardsSkeleton, ErrorState } from '@/components/ui/States';
+import { visaPath } from '@/utils/icons';
+
+/** Redirects legacy /services/:slug URLs to the canonical /visa/:route. */
+function ServiceAlias() {
+  const { slug = '' } = useParams();
+  return <Navigate to={visaPath(slug)} replace />;
+}
 
 /* Public pages (code-split) */
 const Home = lazy(() => import('@/pages/Home'));
@@ -18,6 +25,7 @@ const BlogPostPage = lazy(() => import('@/pages/BlogPost'));
 const FaqPage = lazy(() => import('@/pages/FaqPage'));
 const Contact = lazy(() => import('@/pages/Contact'));
 const LegalPage = lazy(() => import('@/pages/legal/LegalPage'));
+const ProcessPage = lazy(() => import('@/pages/Process'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 
 /* Admin */
@@ -69,9 +77,12 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/visa-services" element={<VisaServices />} />
+            <Route path="/services" element={<VisaServices />} />
+            <Route path="/services/:slug" element={<ServiceAlias />} />
             <Route path="/visa/:slug" element={<VisaLanding />} />
             <Route path="/countries" element={<Countries />} />
             <Route path="/countries/:slug" element={<CountryDetail />} />
+            <Route path="/process" element={<ProcessPage />} />
             <Route path="/eligibility" element={<Eligibility />} />
             <Route path="/consultation" element={<Consultation />} />
             <Route path="/blog" element={<Blog />} />

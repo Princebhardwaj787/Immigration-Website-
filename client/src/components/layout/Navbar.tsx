@@ -7,6 +7,7 @@ import { ButtonLink } from '@/components/ui/Button';
 import { cn } from '@/utils';
 
 const TEL_HREF = `tel:${COMPANY.phone.replace(/[^\d+]/g, '')}`;
+const TEL_HREF2 = `tel:${COMPANY.phone2.replace(/[^\d+]/g, '')}`;
 const WHATSAPP_HREF = `https://wa.me/${COMPANY.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(
   `Hello ${COMPANY.name}, I would like to speak to someone about a visa enquiry.`,
 )}`;
@@ -87,13 +88,14 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href={`tel:${COMPANY.phone.replace(/[^\d+]/g, '')}`}
-            className="hidden items-center gap-1.5 rounded-lg px-2 py-2 text-sm font-medium text-ink-600 hover:text-navy-950 xl:flex"
-          >
+          <div className="hidden items-center gap-1.5 rounded-lg px-2 py-2 text-sm font-medium text-ink-600 hover:text-navy-950 xl:flex">
             <Phone className="h-4 w-4 text-gold-600" aria-hidden="true" />
             {COMPANY.phone}
-          </a>
+          </div>
+          <div className="hidden items-center gap-1.5 rounded-lg px-2 py-2 text-sm font-medium text-ink-600 hover:text-navy-950 xl:flex">
+            <Phone className="h-4 w-4 text-gold-600" aria-hidden="true" />
+            {COMPANY.phone2}
+          </div>
           <a
             href={WHATSAPP_HREF}
             target="_blank"
@@ -144,7 +146,7 @@ export default function Navbar() {
             </NavLink>
           ))}
           <ButtonLink to="/consultation" className="mt-3 w-full" size="lg">
-            Book Free Consultation
+            Book Consultation
           </ButtonLink>
 
           {/* Direct contact: no form needed */}
@@ -154,13 +156,20 @@ export default function Navbar() {
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-navy-900/25 px-4 py-3 text-sm font-semibold text-navy-950 transition-colors hover:border-navy-900 hover:bg-navy-950 hover:text-white"
             >
               <Phone className="h-4 w-4 text-gold-600" aria-hidden="true" />
-              Call Now
+              {COMPANY.phone}
+            </a>
+            <a
+              href={TEL_HREF2}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-navy-900/25 px-4 py-3 text-sm font-semibold text-navy-950 transition-colors hover:border-navy-900 hover:bg-navy-950 hover:text-white"
+            >
+              <Phone className="h-4 w-4 text-gold-600" aria-hidden="true" />
+              {COMPANY.phone2}
             </a>
             <a
               href={WHATSAPP_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-whatsapp px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-whatsapp-dark"
+              className="col-span-2 inline-flex items-center justify-center gap-2 rounded-xl bg-whatsapp px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-whatsapp-dark"
             >
               <MessageCircle className="h-4 w-4" aria-hidden="true" />
               WhatsApp

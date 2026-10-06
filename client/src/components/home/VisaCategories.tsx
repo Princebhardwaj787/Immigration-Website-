@@ -69,7 +69,7 @@ export default function VisaCategories() {
 
       <p className="mt-10 text-center">
         <Link
-          to="/visa-services"
+          to="/services"
           className="inline-flex items-center gap-2 font-semibold text-navy-900 underline-offset-4 hover:underline"
         >
           View all services in detail

@@ -4,12 +4,10 @@ import Seo, { breadcrumbLd } from '@/components/ui/Seo';
 import { Section, SectionHeading } from '@/components/ui/Section';
 import { Accordion, ErrorState, Skeleton } from '@/components/ui/States';
 import { ButtonLink } from '@/components/ui/Button';
-import { useFetch } from '@/hooks/useFetch';
-import type { Faq } from '@/services/api';
+import { FAQS, FAQ_CATEGORIES } from '@/data/faqs';
 
 export default function FaqPage() {
-  const { data, loading, error, refetch } = useFetch<{ data: Faq[] }>('/faqs');
-  const faqs = data?.data ?? [];
+  const faqs = FAQS;
 
   return (
     <>
@@ -55,27 +53,17 @@ export default function FaqPage() {
           description="Type a keyword to filter the list, or browse everything below."
         />
 
-        {loading ? (
-          <div className="mx-auto max-w-3xl space-y-3">
-            {Array.from({ length: 7 }).map((_, i) => (
-              <Skeleton key={i} className="h-16 w-full rounded-2xl" />
-            ))}
-          </div>
-        ) : error ? (
-          <ErrorState message={error} onRetry={refetch} />
-        ) : (
-          <div className="mx-auto max-w-3xl">
-            <Accordion
-              items={faqs.map((f) => ({
-                id: f.id,
-                question: f.question,
-                answer: f.answer,
-                category: f.category,
-              }))}
-              searchable
-            />
-          </div>
-        )}
+        <div className="mx-auto max-w-3xl">
+          <Accordion
+            items={faqs.map((f) => ({
+              id: f.question,
+              question: f.question,
+              answer: f.answer,
+              category: f.category,
+            }))}
+            searchable
+          />
+        </div>
       </Section>
 
       <Section className="!pt-0">
@@ -85,12 +73,12 @@ export default function FaqPage() {
           </span>
           <h2 className="heading-md">Still have a question?</h2>
           <p className="max-w-xl text-sm leading-relaxed text-ink-600">
-            Every case is different. Send us your question or book a free consultation and we will
+            Every case is different. Send us your question or book a consultation and we will
             walk through it with you.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <ButtonLink to="/consultation" variant="gold">
-              Book Free Consultation
+              Book Consultation
             </ButtonLink>
             <Link
               to="/contact"

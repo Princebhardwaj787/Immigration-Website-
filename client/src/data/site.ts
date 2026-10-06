@@ -6,20 +6,25 @@ export const SITE = {
   url: 'https://www.example.com',
   tagline: 'Visa & Overseas Consultancy',
   description:
-    'Professional guidance for study, work, business, tourist, dependent and PR visa applications. Book a free consultation.',
+    'Professional guidance for study, work, business, tourist, dependent and PR visa applications. Book a consultation with our experts.',
   twitter: '@example',
-  locale: 'en_US',
+  locale: 'en_IN',
 } as const;
 
+/** Primary navigation — keep labels short so the desktop bar never wraps. */
 export const NAV_LINKS = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
-  { label: 'Visa Services', to: '/visa-services' },
+  { label: 'Services', to: '/services' },
   { label: 'Countries', to: '/countries' },
-  { label: 'Eligibility', to: '/eligibility' },
-  { label: 'Blog', to: '/blog' },
-  { label: 'FAQs', to: '/faqs' },
+  { label: 'Process', to: '/process' },
   { label: 'Contact', to: '/contact' },
+] as const;
+
+export const LEGAL_LINKS = [
+  { label: 'Privacy Policy', to: '/privacy-policy' },
+  { label: 'Terms & Conditions', to: '/terms' },
+  { label: 'Disclaimer', to: '/disclaimer' },
 ] as const;
 
 export const DISCLAIMER_TEXT =
@@ -46,4 +51,12 @@ export const DESTINATIONS = [
   'Dubai / UAE',
   'Singapore',
   'Other',
+] as const;
+
+/** Trust statistics — replace with real business figures when available. */
+export const STATS = [
+  { value: 5000, suffix: '+', label: 'Clients Assisted' },
+  { value: 25, suffix: '+', label: 'Countries' },
+  { value: 10, suffix: '+', label: 'Years Experience' },
+  { value: 95, suffix: '%', label: 'Client Satisfaction' },
 ] as const;

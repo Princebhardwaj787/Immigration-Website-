@@ -1,11 +1,12 @@
 import Hero from '@/components/home/Hero';
+import Stats from '@/components/home/Stats';
 import TrustStrip from '@/components/home/TrustStrip';
 import VisaCategories from '@/components/home/VisaCategories';
 import Destinations from '@/components/home/Destinations';
 import WhyUs from '@/components/home/WhyUs';
 import EligibilityPreview from '@/components/home/EligibilityPreview';
 import Process from '@/components/home/Process';
-import TestimonialsSection from '@/components/home/TestimonialsSection';
+import Testimonials from '@/components/home/Testimonials';
 import BlogSection from '@/components/home/BlogSection';
 import FaqSection from '@/components/home/FaqSection';
 import FinalCta from '@/components/home/FinalCta';
@@ -31,13 +32,14 @@ export default function Home() {
         }}
       />
       <Hero />
+      <Stats />
       <TrustStrip />
       <VisaCategories />
       <Destinations />
       <WhyUs />
       <EligibilityPreview />
       <Process />
-      <TestimonialsSection />
+      <Testimonials />
       <BlogSection />
       <FaqSection />
       <FinalCta />

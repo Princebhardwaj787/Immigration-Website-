@@ -9,13 +9,15 @@ import { Button } from '@/components/ui/Button';
 import { Input, Textarea, Checkbox } from '@/components/ui/Field';
 import { FormAlert, LoadingButton } from '@/components/ui/States';
 import { api, ApiError } from '@/services/api';
+import { VISA_TYPES, DESTINATIONS } from '@/data/site';
 import { COMPANY } from '@/data/company';
 
 const schema = z.object({
   name: z.string().trim().min(2, 'Enter your full name.'),
   email: z.string().trim().email('Enter a valid email address.'),
-  phone: z.string().optional().or(z.literal('')),
-  subject: z.string().optional().or(z.literal('')),
+  phone: z.string().trim().min(5, 'Enter a valid phone number.').max(40),
+  service: z.string().trim().min(1, 'Select a service.'),
+  destination: z.string().trim().min(1, 'Select a destination.'),
   message: z.string().trim().min(5, 'Tell us how we can help.').max(3000),
   consent: z.boolean().refine((v) => v === true, {
     message: 'You must accept the privacy notice to continue.',
@@ -37,7 +39,7 @@ export default function Contact() {
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
     mode: 'onTouched',
-    defaultValues: { name: '', email: '', phone: '', subject: '', message: '', consent: false },
+    defaultValues: { name: '', email: '', phone: '', service: '', destination: '', message: '', consent: false },
   });
 
   const onSubmit = async (values: FormValues) => {
@@ -120,6 +122,9 @@ export default function Contact() {
                     <p className="text-xs font-semibold uppercase tracking-wide text-ink-400">Phone</p>
                     <a href={`tel:${COMPANY.phone.replace(/\s/g, '')}`} className="text-sm text-ink-700 hover:text-royal-700">
                       {COMPANY.phone}
+                    </a>
+                    <a href={`tel:${COMPANY.phone2.replace(/\s/g, '')}`} className="block text-sm text-ink-700 hover:text-royal-700 mt-1">
+                      {COMPANY.phone2}
                     </a>
                   </div>
                 </li>
@@ -209,30 +214,63 @@ export default function Contact() {
 
                 <div className="mt-5 grid gap-5 sm:grid-cols-2">
                   <Input
-                    label="Full name"
+                    label="Full Name"
                     autoComplete="name"
                     error={errors.name?.message}
                     {...register('name')}
                   />
                   <Input
-                    label="Email"
-                    type="email"
-                    autoComplete="email"
-                    error={errors.email?.message}
-                    {...register('email')}
-                  />
-                  <Input
-                    label="Phone (optional)"
+                    label="Phone Number"
                     type="tel"
                     autoComplete="tel"
                     error={errors.phone?.message}
                     {...register('phone')}
                   />
                   <Input
-                    label="Subject (optional)"
-                    error={errors.subject?.message}
-                    {...register('subject')}
+                    label="Email Address"
+                    type="email"
+                    autoComplete="email"
+                    error={errors.email?.message}
+                    {...register('email')}
                   />
+                  <select
+                    {...register('service')}
+                    className="appearance-none w-full rounded-xl border border-ink-200 bg-white px-4 py-3 pr-10 text-sm text-ink-900 focus:border-royal-500 focus:outline-none focus:ring-2 focus:ring-royal-500/30"
+                    aria-invalid={errors.service ? 'true' : 'false'}
+                  >
+                    <option value="" disabled>
+                      Select a service
+                    </option>
+                    {VISA_TYPES.map((v) => (
+                      <option key={v} value={v}>
+                        {v}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.service && (
+                    <p className="mt-1.5 text-sm text-red-600" role="alert">
+                      {errors.service.message}
+                    </p>
+                  )}
+                  <select
+                    {...register('destination')}
+                    className="appearance-none w-full rounded-xl border border-ink-200 bg-white px-4 py-3 pr-10 text-sm text-ink-900 focus:border-royal-500 focus:outline-none focus:ring-2 focus:ring-royal-500/30"
+                    aria-invalid={errors.destination ? 'true' : 'false'}
+                  >
+                    <option value="" disabled>
+                      Select a destination
+                    </option>
+                    {DESTINATIONS.map((d) => (
+                      <option key={d} value={d}>
+                        {d}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.destination && (
+                    <p className="mt-1.5 text-sm text-red-600" role="alert">
+                      {errors.destination.message}
+                    </p>
+                  )}
                   <Textarea
                     label="Message"
                     placeholder="How can we help?"
@@ -251,7 +289,7 @@ export default function Contact() {
 
                 <div className="mt-6 flex justify-end border-t border-ink-100 pt-5">
                   <Button type="submit" variant="gold" disabled={submitting}>
-                    {submitting ? <LoadingButton label="Sending…" /> : 'Send message'}
+                    {submitting ? <LoadingButton label="Sending…" /> : 'Submit Enquiry'}
                     {!submitting && <Send className="h-4 w-4" aria-hidden="true" />}
                   </Button>
                 </div>

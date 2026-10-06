@@ -1,23 +1,30 @@
 import { ArrowRight, MessageCircle, CalendarCheck } from 'lucide-react';
 import { ButtonLink } from '@/components/ui/Button';
 import Reveal from '@/components/ui/Reveal';
+import SmartImage from '@/components/ui/SmartImage';
 import { COMPANY } from '@/data/company';
 
-/** Final homepage CTA band. */
+/** Final homepage CTA band with an international backdrop. */
 export default function FinalCta() {
   const whatsappHref = `https://wa.me/${COMPANY.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
     'Hello, I would like to ask about visa options.',
   )}`;
 
   return (
-    <section className="relative overflow-hidden bg-cta-gradient py-16 md:py-20" aria-labelledby="final-cta">
+    <section className="relative overflow-hidden bg-navy-950 py-16 md:py-24" aria-labelledby="final-cta">
+      <div className="absolute inset-0">
+        <SmartImage
+          src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1920&q=60"
+          alt=""
+          seed="final-cta"
+          className="h-full w-full opacity-30"
+          imgClassName="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/85 to-navy-950/60" />
+      </div>
       <div
         aria-hidden="true"
         className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-gold-400/20 blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute -bottom-32 -right-16 h-96 w-96 rounded-full bg-royal-400/20 blur-3xl"
       />
 
       <div className="container-page relative">
@@ -28,22 +35,21 @@ export default function FinalCta() {
               Ready when you are
             </p>
             <h2 id="final-cta" className="heading-lg text-white">
-              Talk to a consultant about your plans
+              Ready to Begin Your Journey?
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-navy-100 md:text-lg">
-              Your first consultation is free. Bring your questions — we will walk you through the
-              likely pathways, documents and timelines for your situation.
+              Talk to our experts and discover the right path for your overseas plans.
             </p>
 
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <ButtonLink to="/consultation" variant="gold" size="lg" className="group">
                 <CalendarCheck className="h-4 w-4" aria-hidden="true" />
-                Book Free Consultation
+                Book a Consultation
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </ButtonLink>
               <ButtonLink href={whatsappHref} variant="light" size="lg">
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                Chat on WhatsApp
+                Talk to Us
               </ButtonLink>
             </div>
 

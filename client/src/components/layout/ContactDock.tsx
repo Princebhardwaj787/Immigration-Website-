@@ -5,6 +5,7 @@ import { cn } from '@/utils';
 
 /** Dial link: keeps the leading +, strips spaces/dashes. */
 const TEL_HREF = `tel:${COMPANY.phone.replace(/[^\d+]/g, '')}`;
+const TEL_HREF2 = `tel:${COMPANY.phone2.replace(/[^\d+]/g, '')}`;
 
 /** WhatsApp deep link with a pre-filled message (opens the app directly). */
 const WHATSAPP_HREF = `https://wa.me/${COMPANY.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(
@@ -57,7 +58,7 @@ export default function ContactDock() {
   }, [keyboardOpen]);
 
   const whatsappLabel = `Chat with ${COMPANY.name} on WhatsApp`;
-  const callLabel = `Call ${COMPANY.name} at ${COMPANY.phone}`;
+  const callLabel = `Call ${COMPANY.name} at ${COMPANY.phone} or ${COMPANY.phone2}`;
 
   return (
     <>
@@ -70,17 +71,28 @@ export default function ContactDock() {
         )}
         style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
       >
-        <nav aria-label="Quick contact" className="grid grid-cols-2 gap-2.5 p-3">
+        <nav aria-label="Quick contact" className="grid grid-cols-3 gap-2.5 p-3">
           <a
             href={TEL_HREF}
-            aria-label={callLabel}
+            aria-label={`Call ${COMPANY.name} at ${COMPANY.phone}`}
             className={cn(
               base,
               'border border-navy-900/25 bg-white px-3 py-3.5 text-sm text-navy-950 hover:border-navy-900 hover:bg-navy-950 hover:text-white',
             )}
           >
             <Phone className="h-4 w-4 shrink-0 text-gold-600" aria-hidden="true" />
-            Call Now
+            <span className="hidden sm:inline">{COMPANY.phone}</span>
+          </a>
+          <a
+            href={TEL_HREF2}
+            aria-label={`Call ${COMPANY.name} at ${COMPANY.phone2}`}
+            className={cn(
+              base,
+              'border border-navy-900/25 bg-white px-3 py-3.5 text-sm text-navy-950 hover:border-navy-900 hover:bg-navy-950 hover:text-white',
+            )}
+          >
+            <Phone className="h-4 w-4 shrink-0 text-gold-600" aria-hidden="true" />
+            <span className="hidden sm:inline">{COMPANY.phone2}</span>
           </a>
           <a
             href={WHATSAPP_HREF}
@@ -111,6 +123,18 @@ export default function ContactDock() {
         >
           <Phone className="h-4 w-4 text-gold-400" aria-hidden="true" />
           {COMPANY.phone}
+        </a>
+        <a
+          href={TEL_HREF2}
+          aria-label={`Call ${COMPANY.name} at ${COMPANY.phone2}`}
+          title={COMPANY.phone2}
+          className={cn(
+            base,
+            'bg-navy-950 px-4 py-3 text-sm text-white shadow-lift hover:bg-navy-800',
+          )}
+        >
+          <Phone className="h-4 w-4 text-gold-400" aria-hidden="true" />
+          {COMPANY.phone2}
         </a>
         <a
           href={WHATSAPP_HREF}

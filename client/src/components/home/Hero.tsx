@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, ShieldCheck, Search, ChevronDown, Phone, MessageCircle } from 'lucide-react';
+import { ArrowRight, ShieldCheck, ChevronDown, Phone, MessageCircle, Compass } from 'lucide-react';
 import { ButtonLink } from '@/components/ui/Button';
 import SmartImage from '@/components/ui/SmartImage';
 import { DESTINATIONS, VISA_TYPES } from '@/data/site';
@@ -47,30 +47,37 @@ export default function Hero() {
   );
 
   const explore = () => {
-    if (purpose) return navigate(PURPOSE_TO_PATH[purpose] || '/visa-services');
+    if (purpose) return navigate(PURPOSE_TO_PATH[purpose] || '/services');
     if (destination && COUNTRY_TO_SLUG[destination]) {
       return navigate(`/countries/${COUNTRY_TO_SLUG[destination]}`);
     }
-    navigate('/visa-services');
+    navigate('/services');
   };
 
   return (
     <section className="relative overflow-hidden bg-navy-950" aria-labelledby="hero-heading">
-      {/* Background image + overlays */}
+      {/* Background image + dark gradient overlay */}
       <div className="absolute inset-0">
-        <SmartImage
-          src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=60"
-          alt=""
-          seed="hero"
-          loading="eager"
-          className="h-full w-full opacity-40"
-          imgClassName="object-cover"
-        />
+        <motion.div
+          initial={false}
+          animate={reduce ? undefined : { scale: [1, 1.08] }}
+          transition={{ duration: 12, ease: 'easeOut' }}
+          className="h-full w-full"
+        >
+          <SmartImage
+            src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=60"
+            alt=""
+            seed="hero"
+            loading="eager"
+            className="h-full w-full opacity-40"
+            imgClassName="object-cover"
+          />
+        </motion.div>
         <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/50" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-navy-950/60" />
         <div
           aria-hidden="true"
-          className="absolute -right-32 top-1/4 h-96 w-96 rounded-full bg-royal-700/30 blur-3xl"
+          className="absolute -right-32 top-1/4 h-96 w-96 rounded-full bg-royal-500/30 blur-3xl"
         />
       </div>
 
@@ -84,7 +91,7 @@ export default function Hero() {
             className="eyebrow mb-5 text-gold-300"
           >
             <span className="h-px w-6 bg-current" aria-hidden="true" />
-            Immigration &amp; Overseas Consultancy
+            Your Global Journey Starts Here
           </motion.p>
 
           <motion.h1
@@ -94,9 +101,9 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.08 }}
             className="font-display text-4xl font-extrabold leading-[1.05] text-white sm:text-5xl md:text-6xl"
           >
-            Your Global Journey{' '}
+            Turn Your Overseas Dreams{' '}
             <span className="bg-gradient-to-r from-gold-300 to-gold-500 bg-clip-text text-transparent">
-              Starts Here
+              Into Reality
             </span>
           </motion.h1>
 
@@ -106,9 +113,8 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.16 }}
             className="mt-6 max-w-xl text-base leading-relaxed text-navy-100 md:text-lg"
           >
-            Professional, transparent assistance for study, work, business, tourist, dependent and
-            permanent residency applications — from your first consultation to your final document
-            checklist.
+            Professional guidance for study, work, business, tourism and immigration opportunities
+            around the world.
           </motion.p>
 
           <motion.div
@@ -118,12 +124,12 @@ export default function Hero() {
             className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
           >
             <ButtonLink to="/consultation" variant="gold" size="lg" className="group">
-              Book Free Consultation
+              Book a Consultation
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </ButtonLink>
-            <ButtonLink to="/eligibility" variant="light" size="lg">
-              <Search className="h-4 w-4" aria-hidden="true" />
-              Check Visa Options
+            <ButtonLink to="/services" variant="light" size="lg">
+              <Compass className="h-4 w-4" aria-hidden="true" />
+              Explore Services
             </ButtonLink>
           </motion.div>
 
@@ -141,6 +147,13 @@ export default function Hero() {
             >
               <Phone className="h-4 w-4 text-gold-300" aria-hidden="true" />
               {COMPANY.phone}
+            </a>
+            <a
+              href={`tel:${COMPANY.phone2.replace(/[^\d+]/g, '')}`}
+              className="inline-flex items-center gap-2 rounded-xl border border-white/25 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:border-gold-400 hover:bg-white/20"
+            >
+              <Phone className="h-4 w-4 text-gold-300" aria-hidden="true" />
+              {COMPANY.phone2}
             </a>
             <a
               href={`https://wa.me/${COMPANY.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(
@@ -167,7 +180,7 @@ export default function Hero() {
             </li>
             <li className="flex items-center gap-2">
               <ShieldCheck className="h-4 w-4 text-gold-400" aria-hidden="true" />
-              Free first consultation
+              Personal consultation
             </li>
             <li className="flex items-center gap-2">
               <ShieldCheck className="h-4 w-4 text-gold-400" aria-hidden="true" />

@@ -105,7 +105,7 @@ export default function VisaLanding() {
                 </p>
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                   <ButtonLink to="/consultation" variant="gold">
-                    Book Free Consultation
+                    Book Consultation
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </ButtonLink>
                   <ButtonLink to="/eligibility" variant="light">

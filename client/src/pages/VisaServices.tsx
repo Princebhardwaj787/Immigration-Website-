@@ -68,6 +68,11 @@ export default function VisaServices() {
                       <span className="rounded-full bg-gold-50 px-3 py-1 text-xs font-semibold text-gold-700">
                         0{i + 1}
                       </span>
+                      <span
+                        className="absolute top-2 right-2 rounded-xl bg-navy-800 text-xs font-semibold text-gold-300 px-2.5 py-0.5"
+                      >
+                        Consultation
+                      </span>
                     </div>
 
                     <h2 className="mt-5 text-xl font-bold text-navy-950">
@@ -118,7 +123,7 @@ export default function VisaServices() {
               Check Visa Options
             </ButtonLink>
             <ButtonLink to="/consultation" variant="outline">
-              Book Free Consultation
+              Book Consultation
             </ButtonLink>
           </div>
         </div>

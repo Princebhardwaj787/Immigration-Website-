@@ -12,7 +12,7 @@ import { Section } from '@/components/ui/Section';
 const ITEMS = [
   {
     icon: MessagesSquare,
-    title: 'Free first consultation',
+    title: 'First consultation',
     text: 'Understand your options before you commit to anything.',
   },
   {

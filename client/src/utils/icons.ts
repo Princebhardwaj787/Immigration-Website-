@@ -11,6 +11,7 @@ import {
   HeartHandshake,
   BadgeCheck,
   BookOpen,
+  TrendingUp,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -28,6 +29,7 @@ const ICONS: Record<string, LucideIcon> = {
   HeartHandshake,
   BadgeCheck,
   BookOpen,
+  TrendingUp,
 };
 
 export function getServiceIcon(name?: string): LucideIcon {

@@ -219,7 +219,7 @@ export default function CountryDetail() {
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <ButtonLink to="/consultation" variant="gold">
-                  Book Free Consultation
+                  Book Consultation
                 </ButtonLink>
                 <Link
                   to="/eligibility"

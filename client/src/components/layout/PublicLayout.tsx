@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import ContactDock from './ContactDock';
+import FloatingWhatsApp from './FloatingWhatsApp';
 
 /** Restores scroll position on route change (unless a hash is present). */
 function ScrollManager() {
@@ -33,8 +34,9 @@ export default function PublicLayout() {
       <Footer />
       {/* Clearance so the contact dock never covers footer content:
           bottom bar on mobile, floating pills on sm+ (which sit ~7.5rem tall). */}
-      <div className="h-[4.75rem] shrink-0 sm:h-[8.5rem]" aria-hidden="true" />
+      <div className="h-[8.5rem] shrink-0" aria-hidden="true" />
       <ContactDock />
+      <FloatingWhatsApp />
     </div>
   );
 }

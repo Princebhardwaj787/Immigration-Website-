@@ -15,6 +15,7 @@ export const COMPANY = {
 
   email: 'flynestoverseasconsutancy@gmail.com',
   phone: '+91 81682 23966',
+  phone2: '+91 72065 09457',
   whatsapp: '+91 81682 23966',
 
   address: {
